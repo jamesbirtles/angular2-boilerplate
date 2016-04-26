@@ -1,0 +1,36 @@
+[layout="row"], [layout="column"] {
+  display: flex;
+}
+
+[layout="row"] {
+  flex-direction: row;
+}
+
+[layout="column"] {
+  flex-direction: column;
+}
+
+[flex="33"] {
+  flex: 0 1 33.33%;
+}
+
+[flex="50"] {
+  flex: 0 1 50%;
+}
+
+[flex="66"] {
+  flex: 0 1 66.66%;
+}
+
+[flex-grow] {
+  flex-grow: 1;
+}
+
+[centre-vertical] {
+  align-items: center;
+}
+
+[centre-all] {
+  align-items: center;
+  justify-content: center;
+}
