@@ -1,7 +1,6 @@
-import { bootstrap } from "angular2/platform/browser";
-import { ROUTER_PROVIDERS } from "angular2/router";
+import { bootstrap } from "@angular/platform-browser-dynamic";
 import { AppComponent } from "./app.component";
 
-bootstrap(AppComponent, [ ROUTER_PROVIDERS ])
+bootstrap(AppComponent, [])
   .then(() => console.debug("Application Ready."))
   .catch(err => console.warn(err));

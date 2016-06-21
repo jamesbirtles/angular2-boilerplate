@@ -3,7 +3,8 @@
 const webpack = require("webpack");
 const path = require("path");
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
-
+const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const PROD = (process.env.NODE_ENV === "production")
 module.exports = {
   devtool: "source-map",
   debug: true,
@@ -11,10 +12,15 @@ module.exports = {
   entry: {
     "angular2": [
       "rxjs",
-      "reflect-metadata",
-      "angular2/core",
-      "angular2/router",
-      "angular2/http"
+      "./node_modules/reflect-metadata/Reflect.js",
+      "./node_modules/zone.js/dist/zone.js",
+      "@angular/common",
+      "@angular/core",
+      "@angular/compiler",
+      "@angular/platform-browser",
+      "@angular/platform-browser-dynamic",
+      "@angular/router",
+      "@angular/forms"
     ],
     "app": "./src/boot"
   },
@@ -40,8 +46,12 @@ module.exports = {
     ]
   },
 
-  plugins: [
+  plugins: PROD ? [
     new CommonsChunkPlugin({ name: "angular2", filename: "angular2.js", minChunks: Infinity }),
-    new CommonsChunkPlugin({ name: "common", filename: "common.js" })
+    new UglifyJsPlugin({
+      compress: { warnings: false }
+    })
+  ] : [
+    new CommonsChunkPlugin({ name: "angular2", filename: "angular2.js", minChunks: Infinity })
   ]
 };
