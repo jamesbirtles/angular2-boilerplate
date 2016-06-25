@@ -8,7 +8,7 @@ const webpack = require("webpack");
 const WebpackServer = require("webpack-dev-server");
 const runSequence = require("run-sequence");
 
-var paths = {
+const paths = {
   styles: ["./styles/**/*.scss"],
   webpack: "./src/boot.ts"
 };
@@ -42,7 +42,7 @@ gulp.task("build", function (callback) {
 gulp.task("default", ["build"]);
 
 gulp.task("webpack:server", function () {
-  let compiler = webpack(require("./webpack.config"));
+  const compiler = webpack(require("./webpack.config"));
 
   new WebpackServer(compiler, {
     historyApiFallback: true,
