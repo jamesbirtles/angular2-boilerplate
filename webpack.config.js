@@ -4,7 +4,11 @@ const webpack = require("webpack");
 const path = require("path");
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-const PROD = (process.env.NODE_ENV === "production")
+const PROD = process.env.NODE_ENV === "production";
+const plugins = [new CommonsChunkPlugin({ name: "angular2", filename: "angular2.js", minChunks: Infinity })];
+
+if (PROD) plugins.push(new UglifyJsPlugin({compress: { warnings: false }}));
+
 module.exports = {
   devtool: "source-map",
   debug: true,
@@ -46,12 +50,5 @@ module.exports = {
     ]
   },
 
-  plugins: PROD ? [
-    new CommonsChunkPlugin({ name: "angular2", filename: "angular2.js", minChunks: Infinity }),
-    new UglifyJsPlugin({
-      compress: { warnings: false }
-    })
-  ] : [
-    new CommonsChunkPlugin({ name: "angular2", filename: "angular2.js", minChunks: Infinity })
-  ]
+  plugins: plugins
 };
